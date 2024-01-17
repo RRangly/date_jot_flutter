@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_jot/account.dart';
-import 'package:date_jot/event.dart';
+import 'package:date_jot/Modules/account.dart';
+import 'package:date_jot/Modules/event.dart';
 
 class RepeatedEvent {
   final String eventStartingDate;

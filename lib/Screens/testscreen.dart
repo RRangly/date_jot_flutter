@@ -1,4 +1,4 @@
-import 'package:date_jot/custom_widgets.dart';
+import 'package:date_jot/Modules/custom_widgets.dart';
 import 'package:flutter/material.dart';
 
 class TestScreen extends StatefulWidget {

@@ -1,9 +1,9 @@
-import 'package:date_jot/custom_settings.dart';
-import 'package:date_jot/provider_signin.dart';
+import 'package:date_jot/Modules/custom_settings.dart';
+import 'package:date_jot/Screens/provider_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'custom_widgets.dart';
-import 'custom_functions.dart';
+import '../Modules/custom_widgets.dart';
+import '../Modules/custom_functions.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -113,7 +113,6 @@ class SignUpScreen extends StatefulWidget {
         extendedPadding: const EdgeInsets.symmetric(horizontal: 60),
       );
   //functions
-
 }
 
 //build

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_jot/account.dart';
-import 'package:date_jot/calendar.dart';
-import 'package:date_jot/custom_settings.dart';
-import 'package:date_jot/repeated_event.dart';
+import 'package:date_jot/Modules/account.dart';
+import 'package:date_jot/Screens/calendar.dart';
+import 'package:date_jot/Modules/custom_settings.dart';
+import 'package:date_jot/Modules/repeated_event.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:date_jot/custom_settings.dart';
-import 'package:date_jot/custom_widgets.dart';
-import 'package:date_jot/event.dart';
-import 'package:date_jot/extensions.dart';
-import 'package:date_jot/repeated_event.dart';
+import 'package:date_jot/Modules/custom_settings.dart';
+import 'package:date_jot/Modules/custom_widgets.dart';
+import 'package:date_jot/Modules/event.dart';
+import 'package:date_jot/Modules/extensions.dart';
+import 'package:date_jot/Modules/repeated_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -55,64 +55,25 @@ class Calendar {
     List<DateTime> friCalendar = <DateTime>[];
     List<DateTime> satCalendar = <DateTime>[];
     List<DateTime> sunCalendar = <DateTime>[];
+    List<List<DateTime>> calendars = [
+      monCalendar,
+      tueCalendar,
+      wedCalendar,
+      thuCalendar,
+      friCalendar,
+      satCalendar,
+      sunCalendar
+    ];
     for (DateTime i = firstDate; i.weekday > 1;) {
       i = DateTime(
         i.year,
         i.month,
         i.day - 1,
       );
-      final weekDay = i.weekday;
-      switch (weekDay) {
-        case 1:
-          monCalendar.add(i);
-          break;
-        case 2:
-          tueCalendar.add(i);
-          break;
-        case 3:
-          wedCalendar.add(i);
-          break;
-        case 4:
-          thuCalendar.add(i);
-          break;
-        case 5:
-          friCalendar.add(i);
-          break;
-        case 6:
-          satCalendar.add(i);
-          break;
-        case 7:
-          sunCalendar.add(i);
-          break;
-        default:
-      }
+      calendars[i.weekday - 1].add(i);
     }
     for (DateTime i = firstDate; i.day <= lastDayOfMonth.day;) {
-      final weekDay = i.weekday;
-      switch (weekDay) {
-        case 1:
-          monCalendar.add(i);
-          break;
-        case 2:
-          tueCalendar.add(i);
-          break;
-        case 3:
-          wedCalendar.add(i);
-          break;
-        case 4:
-          thuCalendar.add(i);
-          break;
-        case 5:
-          friCalendar.add(i);
-          break;
-        case 6:
-          satCalendar.add(i);
-          break;
-        case 7:
-          sunCalendar.add(i);
-          break;
-        default:
-      }
+      calendars[i.weekday - 1].add(i);
       i = DateTime(
         i.year,
         i.month,
@@ -128,32 +89,7 @@ class Calendar {
         i.month,
         i.day + 1,
       );
-      final weekDay = i.weekday;
-      switch (weekDay) {
-        case 1:
-          monCalendar.add(i);
-          break;
-        case 2:
-          tueCalendar.add(i);
-          break;
-        case 3:
-          wedCalendar.add(i);
-          break;
-        case 4:
-          thuCalendar.add(i);
-          break;
-        case 5:
-          friCalendar.add(i);
-          break;
-        case 6:
-          satCalendar.add(i);
-          break;
-        case 7:
-          sunCalendar.add(i);
-          break;
-        default:
-          break;
-      }
+      calendars[i.weekday - 1].add(i);
     }
     return [
       monCalendar,
@@ -1081,6 +1017,7 @@ class CalendarScreenState extends State<CalendarScreen> {
       },
     );
   }
+
   @override
   void initState() {
     selectedDateUpdate = callBack;
@@ -1111,7 +1048,6 @@ class CalendarScreenState extends State<CalendarScreen> {
         final width = constraints.maxWidth;
         final height = constraints.maxHeight;
         return Scaffold(
-          
           body: ListView(
             padding: const EdgeInsets.all(0),
             children: [

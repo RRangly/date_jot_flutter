@@ -1,7 +1,7 @@
-import 'package:date_jot/account.dart';
-import 'package:date_jot/calendar.dart';
-import 'package:date_jot/custom_functions.dart';
-import 'package:date_jot/custom_settings.dart';
+import 'package:date_jot/Modules/account.dart';
+import 'package:date_jot/Screens/calendar.dart';
+import 'package:date_jot/Modules/custom_functions.dart';
+import 'package:date_jot/Modules/custom_settings.dart';
 import 'package:flutter/material.dart';
 
 class LoggedInScreen extends StatefulWidget {

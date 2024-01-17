@@ -1,6 +1,6 @@
-import 'package:date_jot/account.dart';
-import 'package:date_jot/custom_functions.dart';
-import 'package:date_jot/custom_settings.dart';
+import 'package:date_jot/Modules/account.dart';
+import 'package:date_jot/Modules/custom_functions.dart';
+import 'package:date_jot/Modules/custom_settings.dart';
 import 'package:flutter/material.dart';
 
 class CustomWidgets {

@@ -1,9 +1,9 @@
-import 'package:date_jot/account.dart';
+import 'package:date_jot/Modules/account.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'custom_widgets.dart';
-import 'custom_settings.dart';
+import '../Modules/custom_widgets.dart';
+import '../Modules/custom_settings.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   static final googleSignIn = GoogleSignIn();
