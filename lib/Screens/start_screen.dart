@@ -1,15 +1,10 @@
-import 'package:date_jot/Modules/account.dart';
-import 'package:date_jot/Screens/loggedin_screen.dart';
 import 'package:date_jot/Screens/login_screen.dart';
-import 'package:date_jot/Screens/provider_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:date_jot/Modules/custom_functions.dart';
 import 'package:date_jot/Modules/custom_settings.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
 
 class StartScreen extends StatefulWidget {
-  const StartScreen({Key? key}) : super(key: key);
+  const StartScreen({super.key});
 
   @override
   State<StartScreen> createState() => StartScreenState();
@@ -85,9 +80,9 @@ class StartScreenState extends State<StartScreen> {
                         ),
                         height: height * 0.075,
                         width: width * 0.75,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Text(
                               "Get Started",
                               style: TextStyle(
