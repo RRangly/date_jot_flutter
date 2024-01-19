@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "443296147013",
+    "firebase_url": "https://datejot-65e59-default-rtdb.firebaseio.com",
     "project_id": "datejot-65e59",
     "storage_bucket": "datejot-65e59.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "443296147013-pe1uqo21p9d8f49c5i8fh2jj206st7mp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.date_jot",
+            "certificate_hash": "dfeb45b8e9fcb81fd4d11fae5ac7ad4425cdcc03"
+          }
+        },
         {
           "client_id": "443296147013-phg26e9itrv2qopidf5n3negjuroa2d0.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +38,13 @@
             {
               "client_id": "443296147013-phg26e9itrv2qopidf5n3negjuroa2d0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "443296147013-t8lp2opeea7jvbmcmr5ln2ce3it33tc6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dateJot"
+              }
             }
           ]
         }

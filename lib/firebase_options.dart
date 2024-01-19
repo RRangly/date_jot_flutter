@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '443296147013',
     projectId: 'datejot-65e59',
     authDomain: 'datejot-65e59.firebaseapp.com',
+    databaseURL: 'https://datejot-65e59-default-rtdb.firebaseio.com',
     storageBucket: 'datejot-65e59.appspot.com',
     measurementId: 'G-WKTGKX5DGP',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:443296147013:android:f57011caae93c3b367252c',
     messagingSenderId: '443296147013',
     projectId: 'datejot-65e59',
+    databaseURL: 'https://datejot-65e59-default-rtdb.firebaseio.com',
     storageBucket: 'datejot-65e59.appspot.com',
   );
 
@@ -66,9 +68,10 @@ class DefaultFirebaseOptions {
     appId: '1:443296147013:ios:4d8a9b7b2f11c24067252c',
     messagingSenderId: '443296147013',
     projectId: 'datejot-65e59',
+    databaseURL: 'https://datejot-65e59-default-rtdb.firebaseio.com',
     storageBucket: 'datejot-65e59.appspot.com',
-    iosClientId:
-        '443296147013-t8lp2opeea7jvbmcmr5ln2ce3it33tc6.apps.googleusercontent.com',
+    androidClientId: '443296147013-pe1uqo21p9d8f49c5i8fh2jj206st7mp.apps.googleusercontent.com',
+    iosClientId: '443296147013-t8lp2opeea7jvbmcmr5ln2ce3it33tc6.apps.googleusercontent.com',
     iosBundleId: 'com.example.dateJot',
   );
 
@@ -77,9 +80,10 @@ class DefaultFirebaseOptions {
     appId: '1:443296147013:ios:4d8a9b7b2f11c24067252c',
     messagingSenderId: '443296147013',
     projectId: 'datejot-65e59',
+    databaseURL: 'https://datejot-65e59-default-rtdb.firebaseio.com',
     storageBucket: 'datejot-65e59.appspot.com',
-    iosClientId:
-        '443296147013-t8lp2opeea7jvbmcmr5ln2ce3it33tc6.apps.googleusercontent.com',
+    androidClientId: '443296147013-pe1uqo21p9d8f49c5i8fh2jj206st7mp.apps.googleusercontent.com',
+    iosClientId: '443296147013-t8lp2opeea7jvbmcmr5ln2ce3it33tc6.apps.googleusercontent.com',
     iosBundleId: 'com.example.dateJot',
   );
 }
