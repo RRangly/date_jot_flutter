@@ -162,7 +162,7 @@ class CustomWidgets {
           children: [
             Container(
               decoration: const BoxDecoration(
-                color: CustomSettings.mainGreen,
+                color: mainGreen,
                 borderRadius:
                     BorderRadius.vertical(bottom: Radius.circular(36)),
               ),
@@ -252,7 +252,7 @@ class CustomWidgets {
                               child: Icon(
                                 Icons.notifications_outlined,
                                 size: 25,
-                                color: CustomSettings.mainGreen,
+                                color: mainGreen,
                               ),
                             ),
                           ),
@@ -267,7 +267,7 @@ class CustomWidgets {
         );
       },
     );
-    final overLay = Overlay.of(context)!;
+    final overLay = Overlay.of(context);
     overLay.insert(topOverLay);
   }
 

@@ -1,4 +1,4 @@
-import 'package:date_jot/Screens/login_screen.dart';
+import '../../LegacyLib/ScreensLegacy/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:date_jot/Modules/custom_functions.dart';
 import 'package:date_jot/Modules/custom_settings.dart';
@@ -24,8 +24,7 @@ class StartScreenState extends State<StartScreen> {
           body: Column(
             children: [
               Image(
-                image: const AssetImage(
-                    "Assets/Images/UIElements/NewMenu/Background.png"),
+                image: const AssetImage("Assets/Images/UIElements/NewMenu/Background.png"),
                 width: width * 1.2,
                 height: height * 0.5,
               ),
@@ -33,7 +32,9 @@ class StartScreenState extends State<StartScreen> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(36)),
-                  boxShadow: [CustomSettings.defaultBoxShadow],
+                  boxShadow: [
+                    defaultBoxShadow
+                  ],
                 ),
                 width: width * 1.2,
                 height: height * 0.5,
@@ -41,8 +42,7 @@ class StartScreenState extends State<StartScreen> {
                   children: [
                     SizedBox(height: height * 0.04),
                     Image(
-                      image: const AssetImage(
-                          "Assets/Images/UIElements/General/Logo.png"),
+                      image: const AssetImage("Assets/Images/UIElements/General/Logo.png"),
                       width: logoSize,
                       height: logoSize,
                     ),
@@ -52,7 +52,7 @@ class StartScreenState extends State<StartScreen> {
                       style: TextStyle(
                         fontFamily: "WorkSansMedium",
                         color: Colors.black,
-                        fontSize: CustomSettings.defaultFontSize,
+                        fontSize: defaultFontSize,
                         height: 1.2,
                       ),
                       textAlign: TextAlign.center,
@@ -61,8 +61,8 @@ class StartScreenState extends State<StartScreen> {
                       "Organizing Work",
                       style: TextStyle(
                         fontFamily: "WorkSansMedium",
-                        color: CustomSettings.mainGreen,
-                        fontSize: CustomSettings.defaultFontSize,
+                        color: mainGreen,
+                        fontSize: defaultFontSize,
                         height: 1.2,
                       ),
                       textAlign: TextAlign.center,
@@ -70,12 +70,11 @@ class StartScreenState extends State<StartScreen> {
                     SizedBox(height: height * 0.5 * 0.2),
                     TextButton(
                       onPressed: () async {
-                        CustomFunctions.navigateTo(
-                            context, const LoginScreen());
+                        CustomFunctions.navigateTo(context, const LoginScreen());
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: CustomSettings.mainGreen,
+                          color: mainGreen,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         height: height * 0.075,
@@ -88,7 +87,7 @@ class StartScreenState extends State<StartScreen> {
                               style: TextStyle(
                                 fontFamily: "WorkSansMedium",
                                 color: Colors.white,
-                                fontSize: CustomSettings.defaultFontSize,
+                                fontSize: defaultFontSize,
                               ),
                               textAlign: TextAlign.center,
                             ),

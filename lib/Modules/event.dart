@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_jot/Modules/account.dart';
-import 'package:date_jot/Screens/calendar.dart';
+import '../../LegacyLib/ScreensLegacy/calendar.dart';
 import 'package:date_jot/Modules/custom_settings.dart';
 import 'package:date_jot/Modules/repeated_event.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +24,7 @@ class Event {
     String eventTimeLocal,
     String eventDetailLocal,
   ) async {
-    final fireBaseEventCollection = FirebaseFirestore.instance
-        .collection("AccountInfos")
-        .doc(Account.email.toString())
-        .collection("CalendarEvents")
-        .doc(eventDateLocal)
-        .collection("EventsForTheDay")
-        .doc(eventNameLocal);
+    final fireBaseEventCollection = FirebaseFirestore.instance.collection("AccountInfos").doc(Account.email.toString()).collection("CalendarEvents").doc(eventDateLocal).collection("EventsForTheDay").doc(eventNameLocal);
     final eventJson = {
       "eventDate": eventDateLocal,
       "eventName": eventNameLocal,
@@ -44,21 +38,9 @@ class Event {
     String eventDateLocal,
     String eventNameLocal,
   ) {
-    final fireBaseNormalEventCollection = FirebaseFirestore.instance
-        .collection("AccountInfos")
-        .doc(Account.email.toString())
-        .collection("CalendarEvents")
-        .doc(eventDateLocal)
-        .collection("EventsForTheDay")
-        .doc(eventNameLocal);
+    final fireBaseNormalEventCollection = FirebaseFirestore.instance.collection("AccountInfos").doc(Account.email.toString()).collection("CalendarEvents").doc(eventDateLocal).collection("EventsForTheDay").doc(eventNameLocal);
     fireBaseNormalEventCollection.delete();
-    final firebaseRepEventCollection = FirebaseFirestore.instance
-        .collection("AccountInfos")
-        .doc(Account.email.toString())
-        .collection("CalendarEvents")
-        .doc("RepeatingEvents")
-        .collection("Events")
-        .doc(eventNameLocal);
+    final firebaseRepEventCollection = FirebaseFirestore.instance.collection("AccountInfos").doc(Account.email.toString()).collection("CalendarEvents").doc("RepeatingEvents").collection("Events").doc(eventNameLocal);
     firebaseRepEventCollection.delete();
   }
 
@@ -70,14 +52,7 @@ class Event {
       int.parse(eventTimeTemp[2]),
     );
     print("eventfuturestart");
-    final normalEvents = await FirebaseFirestore.instance
-        .collection("AccountInfos")
-        .doc(Account.email.toString())
-        .collection("CalendarEvents")
-        .doc(eventDateLocal)
-        .collection("EventsForTheDay")
-        .snapshots()
-        .map(
+    final normalEvents = await FirebaseFirestore.instance.collection("AccountInfos").doc(Account.email.toString()).collection("CalendarEvents").doc(eventDateLocal).collection("EventsForTheDay").snapshots().map(
       (snapshot) {
         return snapshot.docs.map(
           (doc) {

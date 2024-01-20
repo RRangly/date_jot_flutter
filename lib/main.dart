@@ -1,9 +1,7 @@
-import 'package:date_jot/Screens/provider_signin.dart';
-import 'package:date_jot/Screens/start_screen.dart';
+import 'package:date_jot/routes.dart';
+import 'package:date_jot/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
-import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /*
@@ -32,7 +30,7 @@ class DateJot extends StatelessWidget {
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(DateJot());
+  runApp(const DateJot());
 }
 
 /// We are using a StatefulWidget such that we only create the [Future] once,
@@ -44,10 +42,10 @@ class DateJot extends StatefulWidget {
   const DateJot({super.key});
 
   @override
-  State<DateJot> createState() => _AppState();
+  State<DateJot> createState() => DateJotState();
 }
 
-class _AppState extends State<DateJot> {
+class DateJotState extends State<DateJot> {
   /// The future is part of the state of our widget. We should not call `initializeApp`
   /// directly inside [build].
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -56,20 +54,28 @@ class _AppState extends State<DateJot> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       // Initialize FlutterFire:
-      future: _initialization,
+      future: Future.wait([
+        _initialization,
+        sharedP
+      ]),
       builder: (context, snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          return Text('error');
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text('loading');
+        } else if (snapshot.hasError) {
+          return const Text('error');
+        } else {
+          final String initRoute;
+          if (snapshot.hasData) {
+            initRoute = '/';
+          } else {
+            initRoute = '/start';
+          }
+          return MaterialApp(
+            routes: appRoutes,
+            theme: appTheme,
+            initialRoute: initRoute,
+          );
         }
-
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp();
-        }
-
-        // Otherwise, show something whilst waiting for initialization to complete
-        return Text('loading');
       },
     );
   }

@@ -1,9 +1,9 @@
 import 'package:date_jot/Modules/custom_settings.dart';
-import 'package:date_jot/Screens/provider_signin.dart';
+import '../../LegacyLib/ScreensLegacy/provider_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Modules/custom_widgets.dart';
-import '../Modules/custom_functions.dart';
+import '../../lib/Modules/custom_widgets.dart';
+import '../../lib/Modules/custom_functions.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -72,8 +72,7 @@ class SignUpScreen extends StatefulWidget {
   }
 
   static void signUpAsGoogle(context) async {
-    final googleProvider =
-        Provider.of<GoogleSignInProvider>(context, listen: false);
+    final googleProvider = Provider.of<GoogleSignInProvider>(context, listen: false);
     await googleProvider.googleLogIn();
 
     if (!context.mounted) return;

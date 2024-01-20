@@ -1,12 +1,12 @@
 import 'package:date_jot/Modules/account.dart';
-import 'package:date_jot/Screens/calendar.dart';
+import '../../LegacyLib/ScreensLegacy/calendar.dart';
 import 'package:date_jot/Modules/custom_functions.dart';
 import 'package:date_jot/Modules/custom_widgets.dart';
 import 'package:date_jot/Modules/custom_settings.dart';
-import 'package:date_jot/Screens/loggedin_screen.dart';
-import 'package:date_jot/Screens/provider_signin.dart';
-import 'package:date_jot/Screens/signup_screen.dart';
-import 'package:date_jot/Screens/testscreen.dart';
+import '../../LegacyLib/ScreensLegacy/loggedin_screen.dart';
+import '../../LegacyLib/ScreensLegacy/provider_signin.dart';
+import '../../LegacyLib/ScreensLegacy/signup_screen.dart';
+import '../../LegacyLib/ScreensLegacy/testscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';

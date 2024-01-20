@@ -2,8 +2,8 @@ import 'package:date_jot/Modules/account.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../Modules/custom_widgets.dart';
-import '../Modules/custom_settings.dart';
+import '../../lib/Modules/custom_widgets.dart';
+import '../../lib/Modules/custom_settings.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   static final googleSignIn = GoogleSignIn();
@@ -94,8 +94,7 @@ class ProviderPassWordScreenState extends State<ProviderPassWordScreen> {
                       textEConts[0].text,
                       GoogleSignInProvider.googleUser!.photoUrl,
                     );
-                    GoogleSignInProvider.googleUser =
-                        await GoogleSignIn().signOut();
+                    GoogleSignInProvider.googleUser = await GoogleSignIn().signOut();
                   } else {}
                 },
                 label: const Text(
