@@ -45,19 +45,26 @@ class DateJot extends StatefulWidget {
   State<DateJot> createState() => DateJotState();
 }
 
+Future<bool> isFirstLaunch() async {
+  final prefs = await SharedPreferences.getInstance();
+  bool firstLaunch = prefs.getBool('firstLaunch') ?? true;
+
+  if (firstLaunch) {
+    await prefs.setBool('firstLaunch', false);
+  }
+
+  return firstLaunch;
+}
+
 class DateJotState extends State<DateJot> {
   /// The future is part of the state of our widget. We should not call `initializeApp`
   /// directly inside [build].
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  final Future<SharedPreferences> sharedP = SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       // Initialize FlutterFire:
-      future: Future.wait([
-        _initialization,
-        sharedP
-      ]),
+      future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text('loading');
@@ -65,6 +72,7 @@ class DateJotState extends State<DateJot> {
           return const Text('error');
         } else {
           final String initRoute;
+
           if (snapshot.hasData) {
             initRoute = '/';
           } else {

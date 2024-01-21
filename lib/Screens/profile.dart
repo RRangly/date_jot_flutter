@@ -1,3 +1,4 @@
+import 'package:date_jot/Modules/auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -5,6 +6,16 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile"),
+      ),
+      body: ElevatedButton(
+          child: Text("Signout"),
+          onPressed: () async {
+            await AuthService().signOut();
+            Navigator.pushNamedAndRemoveUntil(context, "/start", (route) => false);
+          }),
+    );
   }
 }
