@@ -1,5 +1,3 @@
-import 'package:date_jot/Modules/account.dart';
-import 'package:date_jot/Modules/custom_functions.dart';
 import 'package:date_jot/Modules/custom_settings.dart';
 import 'package:flutter/material.dart';
 
@@ -97,6 +95,7 @@ class CustomWidgets {
     }
   }
 
+  /*
   static Widget navigateButtonBuild(
     double width,
     double height,
@@ -120,19 +119,14 @@ class CustomWidgets {
       extendedPadding: const EdgeInsets.symmetric(horizontal: 80),
     );
   }
-
+*/
   static Widget logoBG(double width, double height, double logoSize) {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(35)),
         boxShadow: [
-          BoxShadow(
-              color: Colors.black45,
-              blurRadius: 4,
-              offset: Offset(0, 4),
-              spreadRadius: 0.1,
-              blurStyle: BlurStyle.normal)
+          BoxShadow(color: Colors.black45, blurRadius: 4, offset: Offset(0, 4), spreadRadius: 0.1, blurStyle: BlurStyle.normal)
         ],
       ),
       height: height * 0.165,
@@ -141,8 +135,7 @@ class CustomWidgets {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image(
-            image:
-                const AssetImage("Assets/Images/UIElements/General/Logo.png"),
+            image: const AssetImage("Assets/Images/UIElements/General/Logo.png"),
             width: logoSize * 1.3,
             height: logoSize * 1.3,
           ),
@@ -151,6 +144,7 @@ class CustomWidgets {
     );
   }
 
+  /*
   static void topBar(
     BuildContext context,
     double width,
@@ -163,8 +157,7 @@ class CustomWidgets {
             Container(
               decoration: const BoxDecoration(
                 color: mainGreen,
-                borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(36)),
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(36)),
               ),
               width: width,
               height: height,
@@ -271,6 +264,7 @@ class CustomWidgets {
     overLay.insert(topOverLay);
   }
 
+*/
   static void bottomOverLay(
     BuildContext context,
   ) {

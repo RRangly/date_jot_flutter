@@ -10,7 +10,7 @@ class StartScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final logoSize = (width * 0.175 + height * 0.0875) / 2;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: mainGreen,
       body: Column(
         children: [
           Image(
