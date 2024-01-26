@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 import 'dart:math';
@@ -9,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final userStream = FirebaseAuth.instance.authStateChanges();
+  final user = FirebaseAuth.instance.currentUser;
 
   Future<void> anonLogin() async {
     try {
@@ -54,7 +54,6 @@ class AuthService {
   Future<UserCredential> signInWithApple() async {
     final rawNonce = generateNonce();
     final nonce = sha256ofString(rawNonce);
-
     final appleCredential = await SignInWithApple.getAppleIDCredential(
       scopes: [
         AppleIDAuthorizationScopes.email,
