@@ -57,7 +57,7 @@ class LoginScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              //AuthService().googleLogin();
+              AuthService().signInWithApple();
             },
             child: Container(
               decoration: BoxDecoration(

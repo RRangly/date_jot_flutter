@@ -6,16 +6,21 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-      ),
-      body: ElevatedButton(
-          child: Text("Signout"),
-          onPressed: () async {
-            await AuthService().signOut();
-            Navigator.pushNamedAndRemoveUntil(context, "/start", (route) => false);
-          }),
-    );
+    final user = AuthService().user;
+
+    if (user != null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(user.displayName ?? "Guest"),
+        ),
+        body: ElevatedButton(
+            child: Text("Signout"),
+            onPressed: () async {
+              await AuthService().signOut();
+              Navigator.pushNamedAndRemoveUntil(context, "/start", (route) => false);
+            }),
+      );
+    }
+    return Placeholder();
   }
 }
