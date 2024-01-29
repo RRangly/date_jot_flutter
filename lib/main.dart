@@ -1,5 +1,4 @@
 import 'package:date_jot/routes.dart';
-import 'dart:developer';
 import 'package:date_jot/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

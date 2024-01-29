@@ -955,7 +955,11 @@ class CalendarScreenState extends State<CalendarScreen> {
         final width = constraints.maxWidth;
         final height = constraints.maxHeight;
         return Scaffold(
-          body: ListView(
+          body: Calendar.displayCalendar(
+            Calendar.focusedDay,
+            width * 0.11,
+          ),
+          /*body: ListView(
             padding: const EdgeInsets.all(0),
             children: [
               Row(
@@ -1128,7 +1132,7 @@ class CalendarScreenState extends State<CalendarScreen> {
                 ),
               ),
             ],
-          ),
+          ),*/
         );
       },
     );
