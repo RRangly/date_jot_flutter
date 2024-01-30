@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:date_jot/Modules/custom_settings.dart';
 import 'package:date_jot/Modules/custom_widgets.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,11 @@ class Calendar {
   ];
   static CalendarFormat calendarFormat = CalendarFormat.month;
   static CalendarFormat oppositeFormat(CalendarFormat opp) {
-    if (opp == CalendarFormat.month)
+    if (opp == CalendarFormat.month) {
       return CalendarFormat.week;
-    else
+    } else {
       return CalendarFormat.month;
+    }
   }
 
   static DateTime selectedDay = DateTime.now();
@@ -53,6 +55,7 @@ class Calendar {
   static List<List<DateTime>> daysInMonth(
     DateTime wantedMonth,
   ) {
+    log("DaysInMonthCOmpStart");
     DateTime firstDate = wantedMonth.subtract(
       Duration(days: wantedMonth.day - 1),
     );
@@ -65,13 +68,19 @@ class Calendar {
     for (var i = 0; i < 7; i++) {
       calendars.add(<DateTime>[]);
     }
+    log("First");
     for (DateTime i = firstDate; i.weekday > 1; i = i.subtract(const Duration(days: 1))) {
+      log(i.toString());
       calendars[i.weekday - 1].add(i);
     }
-    for (DateTime i = firstDate; i.day <= lastDayOfMonth.day; i = i.add(const Duration(days: 1))) {
+    log("Second");
+    for (DateTime i = firstDate; i.day < lastDayOfMonth.day; i = i.add(const Duration(days: 1))) {
+      log(i.toString());
       calendars[i.weekday - 1].add(i);
     }
+    log("Third");
     for (DateTime i = lastDayOfMonth; i.weekday < 7; i = i.add(const Duration(days: 1))) {
+      log(i.toString());
       calendars[i.weekday - 1].add(i);
     }
     return calendars;
@@ -110,9 +119,10 @@ class Calendar {
     double blockSize,
   ) {
     final daysInMonth = Calendar.daysInMonth(wantedTime);
-    List<Widget> children = <Widget>[];
+    List<Widget> toAdd = <Widget>[];
+    log("BeforeIteration");
     for (var i = 0; i < 6; i++) {
-      children.add(Column(
+      toAdd.add(Column(
         children: calendarMonthEachColumn(
           numWeekday[i],
           daysInMonth[i],
@@ -120,7 +130,8 @@ class Calendar {
         ),
       ));
     }
-    return Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: children);
+    log("AfterIteration");
+    return Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: toAdd);
   }
 
   static List<Widget> calendarMonthEachColumn(
@@ -128,7 +139,7 @@ class Calendar {
     List<DateTime> days,
     double blockSize,
   ) {
-    return [
+    List<Widget> column = [
       Text(
         dayOfWeek,
         style: const TextStyle(
@@ -138,21 +149,53 @@ class Calendar {
         ),
         textAlign: TextAlign.center,
       ),
-      ...days.map(
-        (date) {
-          return Calendar.buildCalendarDay(
-            date,
-            blockSize,
-          );
-        },
-      ).toList(),
     ];
+    for (var i = 0; i < days.length; i++) {
+      column.add(Calendar.buildCalendarDay(
+        days[i],
+        blockSize,
+      ));
+    }
+    return column;
   }
 
   static Widget buildCalendarDay(
     DateTime eventTime,
     double size,
   ) {
+    BoxDecoration? deco;
+    if (eventTime == Calendar.selectedDay) {
+      deco = BoxDecoration(
+        color: mainGreen,
+        borderRadius: BorderRadius.circular(500),
+      );
+    }
+    Color textColor = Colors.black;
+    if (eventTime.month != Calendar.focusedDay.month) {
+      textColor = Colors.black.withOpacity(0.6);
+    }
+    return InkWell(
+      onTap: () {
+        //CalendarScreenState.selectedDateUpdate(eventTime);
+      },
+      child: Container(
+        width: size,
+        height: size,
+        decoration: deco,
+        child: Center(
+          child: Text(
+            eventTime.day.toString(),
+            style: TextStyle(
+              fontFamily: "WorkSansRegular",
+              color: textColor,
+              fontSize: 15,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+    /*
     if (eventTime ==
         DateTime(
           Calendar.selectedDay.year,
@@ -226,6 +269,7 @@ class Calendar {
         ),
       );
     }
+    */
   }
 
   /*
@@ -919,7 +963,7 @@ class Calendar {
 }
 
 class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({Key? key}) : super(key: key);
+  const CalendarScreen({super.key});
 
   @override
   State<CalendarScreen> createState() => CalendarScreenState();
@@ -950,6 +994,191 @@ class CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+    final width = MediaQuery.of(context).size.width;
+    /*return Scaffold(
+      body: Calendar.displayCalendar(
+        Calendar.focusedDay,
+        width * 0.11,
+      ),
+    );*/
+    return Scaffold(
+      body: ListView(
+        padding: const EdgeInsets.all(0),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  if (Calendar.calendarFormat == CalendarFormat.month) {
+                    setState(() {
+                      Calendar.focusedDay = DateTime(
+                        Calendar.focusedDay.year,
+                        Calendar.focusedDay.month - 1,
+                        Calendar.focusedDay.day,
+                      );
+                    });
+                  } else if (Calendar.calendarFormat == CalendarFormat.week) {
+                    setState(() {
+                      Calendar.focusedDay = DateTime(
+                        Calendar.focusedDay.year,
+                        Calendar.focusedDay.month,
+                        Calendar.focusedDay.day - 7,
+                      );
+                    });
+                  }
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: 18,
+                ),
+              ),
+              SizedBox(width: width * 0.05),
+              Text(
+                "${Calendar.focusedDay.month.toString()} ${Calendar.focusedDay.year}",
+                style: const TextStyle(
+                  fontFamily: "WorkSansMedium",
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+              ),
+              SizedBox(width: width * 0.25),
+              InkWell(
+                onTap: () {
+                  if (Calendar.calendarFormat == CalendarFormat.month) {
+                    setState(() {
+                      Calendar.calendarFormat = CalendarFormat.week;
+                    });
+                  } else {
+                    setState(() {
+                      Calendar.calendarFormat = CalendarFormat.month;
+                    });
+                  }
+                },
+                child: Container(
+                  width: width * 0.2,
+                  height: height * 0.03,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    border: Border.all(color: Colors.black, width: 1),
+                  ),
+                  child: Center(
+                    child: Text(
+                      Calendar.oppositeFormat(Calendar.calendarFormat).toString(),
+                      style: const TextStyle(
+                        fontFamily: "WorkSansMedium",
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: width * 0.05),
+              InkWell(
+                onTap: () {
+                  if (Calendar.calendarFormat == CalendarFormat.month) {
+                    setState(() {
+                      Calendar.focusedDay = DateTime(
+                        Calendar.focusedDay.year,
+                        Calendar.focusedDay.month + 1,
+                        Calendar.focusedDay.day,
+                      );
+                    });
+                  } else if (Calendar.calendarFormat == CalendarFormat.week) {
+                    setState(() {
+                      Calendar.focusedDay = DateTime(
+                        Calendar.focusedDay.year,
+                        Calendar.focusedDay.month,
+                        Calendar.focusedDay.day + 7,
+                      );
+                    });
+                  }
+                },
+                child: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 18,
+                ),
+              ),
+            ],
+          ),
+          /*if (Calendar.calendarFormat == CalendarFormat.week)
+                Calendar.displayCalendarWeek(
+                  Calendar.focusedDay,
+                  width * 0.11,
+                ),*/
+          if (Calendar.calendarFormat == CalendarFormat.month)
+            Calendar.displayCalendar(
+              Calendar.focusedDay,
+              width * 0.11,
+            ),
+          SizedBox(height: height * 0.01),
+          TextButton(
+            onPressed: () async {
+              //Calendar.addEventMenu(context, width * 0.8, height * 0.5);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                boxShadow: [
+                  defaultBoxShadowFun(8)
+                ],
+              ),
+              height: height * 0.06,
+              width: width * 0.7,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Add Event",
+                    style: TextStyle(
+                      fontFamily: "WorkSansMedium",
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              //Calendar.showEventsMenu(context, width * 0.8, height * 0.5);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                boxShadow: [
+                  defaultBoxShadowFun(8)
+                ],
+              ),
+              height: height * 0.06,
+              width: width * 0.7,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Show Events",
+                    style: TextStyle(
+                      fontFamily: "WorkSansMedium",
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    /*
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
@@ -1135,6 +1364,6 @@ class CalendarScreenState extends State<CalendarScreen> {
           ),*/
         );
       },
-    );
+    );*/
   }
 }

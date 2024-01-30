@@ -93,7 +93,8 @@ class LoginScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/signup");
+              //Navigator.pushNamed(context, "/signup");
+              AuthService().anonLogin();
             },
             child: Text(
               "Don't have an account?",
